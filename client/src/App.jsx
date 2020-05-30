@@ -1,55 +1,37 @@
-import React, { useState } from "react";
-import "./App.css";
-import Form from "./components/Form";
-import List from "./components/List";
-import dayjs from "dayjs";
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import styled from "styled-components";
 
-const dummy = [
-  { id: 1, label: "test", dueDate: dayjs(), status: "active" },
-  {
-    id: 2,
-    label: "test2",
-    dueDate: dayjs("2018-04-04T16:00:00.000Z"),
-    status: "active",
-  },
-  {
-    id: 3,
-    label: "test2",
-    dueDate: dayjs("2018-03-04T16:00:00.000Z"),
-    status: "completed",
-  },
-  {
-    id: 4,
-    label: "test2",
-    dueDate: dayjs("2017-03-04T16:00:00.000Z"),
-    status: "completed",
-  },
-];
+import Todo from "./components/Todo";
+import Home from "./components/Home";
+import NavBar from "./components/NavBar";
+
+const Wrapper = styled.div`
+  margin: auto;
+  text-align: center;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+`;
 
 function App() {
-  const [todoItems, settodoItems] = useState([...dummy]);
-
-  const addTodo = (label, dueDate) => {
-    const date = dayjs(dueDate);
-    settodoItems([
-      ...todoItems,
-      { id: new Date(), label, dueDate: date, status: "active" },
-    ]);
-    console.log(todoItems);
-  };
-
-  const markAsCompleted = (id) => {
-    settodoItems(
-      todoItems.map((item) =>
-        item.id === id ? { ...item, status: "completed" } : item
-      )
-    );
-  };
   return (
-    <div className="App">
-      <Form add={addTodo} />
-      <List items={todoItems} markAsCompleted={markAsCompleted} />
-    </div>
+    <Router>
+      <Fragment>
+        <NavBar />
+        <Wrapper>
+          <Switch>
+            <Route path="/todo">
+              <Todo />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Wrapper>
+      </Fragment>
+    </Router>
   );
 }
 
