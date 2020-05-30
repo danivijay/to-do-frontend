@@ -1,39 +1,39 @@
-const Book = require("../models/TodoItem");
+const Todo = require("../models/TodoItem");
 
 // @desc    Get all books
-// @route   GET /api/v1/books
+// @route   GET /api/v1/todo
 // @access  Private
-exports.getBooks = async (req, res, next) => {
+exports.getItems = async (req, res, next) => {
   try {
-    const books = await Book.find().populate("owner");
-    console.log(books);
+    const items = await Todo.find().populate("user");;
+    console.log(items);
     res.status(200).json({
       success: true,
-      count: books.length,
-      data: books.map(
+      count: items.length,
+      data: items.map(
         ({
           _id: id,
-          title,
-          author,
-          isAvailable,
-          owner: { _id: ownerId, name: ownerName },
+          label,
+          due_date,
+          status,
+          user_id: { _id: user_id, name: name },
         }) => ({
           id,
-          title,
-          author,
-          isAvailable,
-          owner: {
-            id: ownerId,
-            name: ownerName,
+          label,
+          due_date,
+          status,
+          user: {
+            id: user_id,
+            name: name,
           },
         })
       ),
     });
   } catch (error) {
-    console.log(`Error on getting books: ${error.message}`.red);
+    console.log(`Error on getting todo items: ${error.message}`.red);
     res.status(500).json({
       success: false,
-      errors: ["Unable to get books"],
+      errors: ["Unable to get Todo Items"],
     });
   }
 };
@@ -41,25 +41,26 @@ exports.getBooks = async (req, res, next) => {
 exports.addTodo = async (req, res, next) => {
   try {
     const { label, due_date } = req.body;
-    const book = await Book.create({
-      title,
-      author,
-      isAvailable: true,
-      owner: req.user_id,
+    const item = await Todo.create({
+      label:label,
+      due_date:due_date,
+      status: true,
+      user_id: req.user_id,
     });
     res.status(201).json({
       success: true,
       data: {
-        id: book.id,
-        title: book.title,
-        author: book.author,
+        id: item.id,
+        label: item.label,
+        due_date: item.due_date,
+        user_id: item.user_id,
       },
     });
   } catch (error) {
-    console.log(`Error on adding book ${error.message}`.red);
+    console.log(`Error on adding todo item ${error.message}`.red);
     res.status(500).json({
       success: false,
-      errors: ["Unable to add book", error.message],
+      errors: ["Unable to add todo item", error.message],
     });
   }
 };
@@ -67,7 +68,7 @@ exports.addTodo = async (req, res, next) => {
 // @desc    Delete a book
 // @route   DELETE /api/v1/books/:id
 // @access  Private
-exports.deleteBook = async (req, res, next) => {
+exports.deleteItem = async (req, res, next) => {
   try {
     const book = await Book.findById(req.params.id);
     if (!book) {
