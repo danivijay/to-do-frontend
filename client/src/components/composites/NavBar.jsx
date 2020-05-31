@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "../designSystem/Button";
 
 const Wrapper = styled.div`
   margin: auto;
@@ -23,19 +24,15 @@ const Links = styled.div`
   align-self: auto;
 `;
 
-const LogoutButton = styled.button`
-  padding: 4px;
-`;
-
 const NavBar = () => {
   return (
     <Wrapper>
       <Container>
         <Title>
-          <h1>Todo</h1>
+          <h1>TodoMan</h1>
         </Title>
         <Links>
-          <LogoutButton>logout</LogoutButton>
+          <Button fullWidth>Log out</Button>
         </Links>
       </Container>
     </Wrapper>
