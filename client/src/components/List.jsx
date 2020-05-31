@@ -53,9 +53,10 @@ const LabelBlock = styled.div`
 `;
 
 const ActiveItemsList = ({ groupedItems, markAsCompleted }) => {
+  const dates = Object.keys(groupedItems).reverse();
   return (
     <Fragment>
-      {Object.keys(groupedItems).map((date) => (
+      {dates.map((date) => (
         <Fragment key={date}>
           <ItemTitleBlock>{dayjs(date).format("DD-MM-YYYY")}</ItemTitleBlock>
           {groupedItems[date].map((item, i) => (

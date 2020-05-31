@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../designSystem/Button";
+import { NavLink } from "react-router-dom";
 
 const Wrapper = styled.div`
   margin: auto;
@@ -29,7 +30,14 @@ const NavBar = () => {
     <Wrapper>
       <Container>
         <Title>
-          <h1>TodoMan</h1>
+          <h1>
+            <NavLink
+              to="/todo"
+              style={{ color: "black", textDecoration: "none" }}
+            >
+              TodoMan
+            </NavLink>
+          </h1>
         </Title>
         <Links>
           <Button fullWidth>Log out</Button>
