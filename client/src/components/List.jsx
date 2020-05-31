@@ -27,10 +27,9 @@ const List = ({ items, markAsCompleted }) => {
 
 const ItemBlock = styled.div`
   display: flex;
-  width: 100%;
   align-items: center;
   padding: 2px 2px 2px 5px;
-  border: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
   border-radius: 2px;
 `;
 
@@ -42,8 +41,8 @@ const ItemTitleBlock = styled.h3`
 `;
 
 const ButtonBlock = styled.div`
-  width: 100%;
   flex-shrink: 10;
+  align-self: flex-end;
 `;
 
 const LabelBlock = styled.div`
