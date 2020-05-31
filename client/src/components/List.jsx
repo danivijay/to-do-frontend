@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import groupBy from "lodash.groupby";
 import dayjs from "dayjs";
+import styled from "styled-components";
+
+import Button from "components/designSystem/Button";
 
 const List = ({ items, markAsCompleted }) => {
   const activeItems = items.filter((item) => item.status === "active");
@@ -22,34 +25,66 @@ const List = ({ items, markAsCompleted }) => {
   );
 };
 
+const ItemBlock = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 2px 2px 2px 5px;
+  border: 1px solid #dadada;
+  border-radius: 2px;
+`;
+
+const ItemTitleBlock = styled.h3`
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  margin: 20px 0 10px 0;
+`;
+
+const ButtonBlock = styled.div`
+  width: 100%;
+  flex-shrink: 10;
+`;
+
+const LabelBlock = styled.div`
+  width: 100%;
+  text-align: left;
+  word-wrap: break-word;
+`;
+
 const ActiveItemsList = ({ groupedItems, markAsCompleted }) => {
   return (
     <Fragment>
       {Object.keys(groupedItems).map((date) => (
-        <div key={date}>
-          <h3>{dayjs(date).format("YYYY-MM-DD")}</h3>
+        <Fragment key={date}>
+          <ItemTitleBlock>{dayjs(date).format("DD-MM-YYYY")}</ItemTitleBlock>
           {groupedItems[date].map((item, i) => (
-            <div key={i}>
-              <span>{item.label}</span>
-              <button onClick={() => markAsCompleted(item.id)}>Complete</button>
-            </div>
+            <ItemBlock key={i}>
+              <LabelBlock>{item.label}</LabelBlock>
+              <ButtonBlock>
+                <Button onClick={() => markAsCompleted(item.id)}>✔</Button>
+              </ButtonBlock>
+            </ItemBlock>
           ))}
-        </div>
+        </Fragment>
       ))}
     </Fragment>
   );
 };
 
+const CompletedItemBlock = styled.div`
+  width: 100%;
+  text-align: left;
+  word-wrap: break-word;
+  text-decoration: line-through;
+`;
+
 const CompletedItemsList = ({ items }) => {
   return (
     <Fragment>
-      <h3>Completed</h3>
+      <ItemTitleBlock>Completed</ItemTitleBlock>
       {items.map((item, i) => (
-        <div key={i}>
-          <div key={i}>
-            <span>{item.label}</span>
-          </div>
-        </div>
+        <CompletedItemBlock key={i}>{item.label}</CompletedItemBlock>
       ))}
     </Fragment>
   );

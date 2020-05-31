@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Label from "./designSystem/Label";
+import Input from "./designSystem/Input";
+import Button from "./designSystem/Button";
+import LinkButton from "./designSystem/LinkButton";
 
 const Container = styled.div`
   display: flex;
@@ -7,40 +11,17 @@ const Container = styled.div`
   text-align: left;
   align-content: space-around;
   max-width: 500px;
-`;
-
-const Label = styled.label`
-  font-size: 0.8em;
-`;
-
-const InputText = styled.input`
-  margin-top: 3px;
-  margin-bottom: 7px;
-`;
-
-const LoginButton = styled.button`
-  margin-top: 5px;
-  min-width: 300px;
-  padding: 2px 0;
-  align-self: center;
-`;
-
-const LinkButton = styled.button`
-  margin-top: 5px;
-  border: none;
-  background: none;
-  text-decoration: underline;
-  align-self: center;
+  width: 100%;
 `;
 
 const Register = ({ handleIsNotHaveAccount }) => {
   return (
     <Container>
       <Label>Email</Label>
-      <InputText type="email" name="email" value="" />
+      <Input type="email" name="email" value="" />
       <Label>Password</Label>
-      <InputText type="password" name="password" value="" />
-      <LoginButton>Login</LoginButton>
+      <Input type="password" name="password" value="" />
+      <Button>Login</Button>
       <LinkButton onClick={handleIsNotHaveAccount}>
         I don't have an account - register
       </LinkButton>

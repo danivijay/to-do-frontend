@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
-import Register from "./Register";
-import Login from "./Login";
+import Register from "../Register";
+import Login from "../Login";
 
 const Home = () => {
   const [isHaveAccount, setisHaveAccount] = useState(false);
