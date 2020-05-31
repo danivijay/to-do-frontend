@@ -7,7 +7,6 @@ exports.getItems = async (req, res, next) => {
   try {
     const { user_id } = req;
     const items = await TodoItem.find({ user_id: user_id });
-    console.log(items);
     res.status(200).json({
       success: true,
       count: items.length,
@@ -70,9 +69,7 @@ exports.updateTodo = async (req, res, next) => {
     todo.label = req.body.label ? req.body.label : todo.label;
     todo.due_date = req.body.due_date ? req.body.due_date : todo.due_date;
     todo.status = req.body.status ? req.body.status : todo.status;
-    // console.log({ todo });
     const item = await todo.save();
-    console.log({ item });
     res.status(201).json({
       success: true,
       data: {
