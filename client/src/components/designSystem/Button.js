@@ -6,10 +6,20 @@ export default styled.button`
   align-self: center;
   font-size: 1em;
   border: 0;
-  border-radius: 2px;
+  border-radius: 5px;
   color: white;
-  background: #03a9f4;
+  background: rgb(0, 137, 254);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 137, 254, 1) 0%,
+    rgba(0, 64, 162, 1) 100%
+  );
   &:hover {
-    background: #18b7ff;
+    background: rgb(0, 127, 235);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 127, 235, 1) 0%,
+      rgba(0, 60, 152, 1) 100%
+    );
   }
 `;
