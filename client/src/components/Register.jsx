@@ -51,7 +51,7 @@ const Register = ({ handleIsHaveAccount }) => {
         value={confirmPassword}
         onChange={(e) => setconfirmPassword(e.target.value)}
       />
-      <Button>Register</Button>
+      <Button fullWidth>Register</Button>
       <LinkButton onClick={handleIsHaveAccount}>
         I already have an account - login
       </LinkButton>
