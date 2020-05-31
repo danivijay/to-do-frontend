@@ -3,14 +3,19 @@ const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-const { getItems, addTodo, deleteItem, patchItem } = require("../controllers/todo");
+const {
+  getItems,
+  addTodo,
+  deleteTodo,
+  updateTodo,
+} = require("../controllers/todo");
 
-router.get("/", getItems);
+router.get("/", auth, getItems);
 
 router.post("/", auth, addTodo);
 
-router.delete("/:id", auth, deleteItem);
+router.delete("/:id", auth, deleteTodo);
 
-//router.patch("/:id", auth, patchItem);
+router.patch("/:id", auth, updateTodo);
 
 module.exports = router;
