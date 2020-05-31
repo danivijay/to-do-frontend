@@ -21,7 +21,7 @@ const Register = ({ handleIsNotHaveAccount }) => {
       <Input type="email" name="email" value="" />
       <Label>Password</Label>
       <Input type="password" name="password" value="" />
-      <Button>Login</Button>
+      <Button fullWidth>Login</Button>
       <LinkButton onClick={handleIsNotHaveAccount}>
         I don't have an account - register
       </LinkButton>
