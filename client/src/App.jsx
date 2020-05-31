@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 
-import Todo from "./components/Todo";
-import Home from "./components/Home";
-import NavBar from "./components/NavBar";
+import Todo from "./components/pages/Todo";
+import Home from "./components/pages/Home";
+import NavBar from "./components/composites/NavBar";
 
 const Wrapper = styled.div`
   margin: auto;
@@ -12,7 +12,8 @@ const Wrapper = styled.div`
   max-width: 600px;
   display: flex;
   justify-content: center;
-  padding: 30px 0;
+  padding: 30px 2%;
+  width: 96%;
 `;
 
 function App() {
