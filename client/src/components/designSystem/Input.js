@@ -7,4 +7,5 @@ export default styled.input`
   font-size: 1em;
   padding: 0 0.4em;
   border: 1px solid #bdbdbd;
+  border-radius: 5px;
 `;
