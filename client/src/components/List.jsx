@@ -6,14 +6,16 @@ import styled from "styled-components";
 import Button from "components/designSystem/Button";
 
 const List = ({ items, markAsCompleted }) => {
+  console.log({ items });
+  // if (!items) return <>;
   const activeItems = items.filter((item) => item.status === "active");
   const activeGroupedItems = groupBy(activeItems, "dueDate");
 
   const completedItems = items.filter((item) => item.status === "completed");
 
-  console.log({ items });
-  console.log({ activeItems });
-  console.log({ activeGroupedItems });
+  // console.log({ items });
+  // console.log({ activeItems });
+  // console.log({ activeGroupedItems });
   return (
     <div>
       <ActiveItemsList
