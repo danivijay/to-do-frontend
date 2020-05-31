@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+export default styled.button`
   width: ${(props) => (props.fullWidth ? "100%" : "auto")};
   padding: 10px;
   align-self: center;
@@ -14,13 +13,3 @@ const StyledButton = styled.button`
     background: #18b7ff;
   }
 `;
-
-const Button = ({ children, fullWidth, ...props }) => {
-  return (
-    <StyledButton fullWidth {...props}>
-      {children}
-    </StyledButton>
-  );
-};
-
-export default Button;
