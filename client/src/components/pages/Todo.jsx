@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import styled from "styled-components";
 
-import List from "./List";
-import Form from "./Form";
-import NavBar from "./NavBar";
+import List from "../List";
+import Form from "../Form";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 
 const dummy = [
   { id: 1, label: "test", dueDate: dayjs(), status: "active" },
@@ -47,11 +53,10 @@ const Todo = () => {
     );
   };
   return (
-    <div className="App">
-      <NavBar />
+    <Container>
       <Form add={addTodo} />
       <List items={todoItems} markAsCompleted={markAsCompleted} />
-    </div>
+    </Container>
   );
 };
 
