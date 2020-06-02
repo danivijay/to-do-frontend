@@ -42,12 +42,11 @@ const Form = ({ add }) => {
   const [dueDate, setdueDate] = useState("");
 
   const handleAddTodo = () => {
-    console.log("here");
     add(label, dueDate);
     setlabel("");
     setdueDate("");
   };
-
+  console.log(label === "" || dueDate == "");
   return (
     <Container>
       <NameBlock>
@@ -69,7 +68,11 @@ const Form = ({ add }) => {
         />
       </DueDateBlock>
       <ButtonBlock>
-        <Button fullWidth onClick={handleAddTodo}>
+        <Button
+          fullWidth
+          disabled={label === "" || dueDate === ""}
+          onClick={handleAddTodo}
+        >
           Add
         </Button>
       </ButtonBlock>

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import List from "../List";
 import Form from "../Form";
 
-import { getTodos, addTodo, updateTodo } from "actions/todo";
+import { getTodos, addTodo, updateTodo, deleteTodo } from "actions/todo";
 
 const Container = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Todo = ({ todos, getTodos, addTodo, updateTodo }) => {
+const Todo = ({ todos, getTodos, addTodo, updateTodo, deleteTodo }) => {
   console.log("todos", todos);
 
   useEffect(() => {
@@ -22,17 +22,26 @@ const Todo = ({ todos, getTodos, addTodo, updateTodo }) => {
   }, []);
 
   const addTodoItem = (label, dueDate) => {
-    const date = dayjs(dueDate);
-    addTodo({ id: new Date(), label, dueDate: date, status: "active" });
+    const date = dueDate;
+    addTodo({ label, dueDate: date, status: "active" });
   };
 
   const markAsCompleted = (id) => {
     updateTodo(id, { status: "complete" });
   };
+
+  const deleteTodoItem = (id) => {
+    deleteTodo(id);
+  };
+
   return (
     <Container>
       <Form add={addTodoItem} />
-      <List items={todos} markAsCompleted={markAsCompleted} />
+      <List
+        items={todos}
+        markAsCompleted={markAsCompleted}
+        deleteTodo={deleteTodoItem}
+      />
     </Container>
   );
 };
@@ -43,6 +52,7 @@ const mapDispatchToProps = (dispatch) => {
     getTodos: (payload) => dispatch(getTodos(payload)),
     addTodo: (payload) => dispatch(addTodo(payload)),
     updateTodo: (id, payload) => dispatch(updateTodo(id, payload)),
+    deleteTodo: (id) => dispatch(deleteTodo(id)),
   };
 };
 
