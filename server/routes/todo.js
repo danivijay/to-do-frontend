@@ -10,12 +10,12 @@ const {
   updateTodo,
 } = require("../controllers/todo");
 
-router.get("/", auth, getItems);
+router.get("/", getItems);
 
-router.post("/", auth, addTodo);
+router.post("/", addTodo);
 
-router.delete("/:id", auth, deleteTodo);
+router.delete("/:id", deleteTodo);
 
-router.patch("/:id", auth, updateTodo);
+router.patch("/:id", updateTodo);
 
 module.exports = router;

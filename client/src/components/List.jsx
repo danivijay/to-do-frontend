@@ -11,7 +11,7 @@ const List = ({ items, markAsCompleted }) => {
   const activeItems = items.filter((item) => item.status === "active");
   const activeGroupedItems = groupBy(activeItems, "dueDate");
 
-  const completedItems = items.filter((item) => item.status === "completed");
+  const completedItems = items.filter((item) => item.status === "complete");
 
   // console.log({ items });
   // console.log({ activeItems });

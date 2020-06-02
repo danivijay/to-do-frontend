@@ -26,10 +26,23 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_TODOS":
+      console.log("in GET_TODOS", action.payload);
+      return {
+        ...state,
+        todos: action.payload,
+      };
     case "ADD_TODO":
       return {
         ...state,
         todos: [...state.todos, action.payload],
+      };
+    case "UPDATE_TODO":
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload.id ? action.payload : todo
+        ),
       };
     default:
       return state;
