@@ -15,7 +15,8 @@ const Spacer = styled.hr`
 `;
 
 const List = ({ items, markAsCompleted, deleteTodo }) => {
-  if (!items) {
+  console.log(items);
+  if (!items || items.length === 0) {
     return <EmptyBlock>Nothing here!!</EmptyBlock>;
   }
   const activeItems = items.filter((item) => item.status === "active");
