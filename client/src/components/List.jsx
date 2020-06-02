@@ -5,24 +5,43 @@ import styled from "styled-components";
 
 import Button from "components/designSystem/Button";
 
-const List = ({ items, markAsCompleted }) => {
-  console.log({ items });
-  // if (!items) return <>;
+const EmptyBlock = styled.div`
+  padding: 50px;
+`;
+
+const Spacer = styled.hr`
+  border: none;
+  padding: 20px;
+`;
+
+const List = ({ items, markAsCompleted, deleteTodo }) => {
+  if (!items) {
+    return <EmptyBlock>Nothing here!!</EmptyBlock>;
+  }
   const activeItems = items.filter((item) => item.status === "active");
   const activeGroupedItems = groupBy(activeItems, "dueDate");
-
   const completedItems = items.filter((item) => item.status === "complete");
-
-  // console.log({ items });
-  // console.log({ activeItems });
-  // console.log({ activeGroupedItems });
+  const isActiveItems = !(
+    Object.keys(activeGroupedItems).length === 0 &&
+    activeGroupedItems.constructor === Object
+  );
+  const isCompletedItems = completedItems && completedItems.length > 0;
+  const isDivider = isActiveItems && isCompletedItems;
+  console.log(isActiveItems, isCompletedItems, { isDivider });
   return (
     <div>
-      <ActiveItemsList
-        groupedItems={activeGroupedItems}
-        markAsCompleted={markAsCompleted}
-      />
-      <CompletedItemsList items={completedItems} />
+      {isActiveItems ? (
+        <ActiveItemsList
+          groupedItems={activeGroupedItems}
+          markAsCompleted={markAsCompleted}
+        />
+      ) : (
+        <EmptyBlock>Hurrey! Everything is complete!!</EmptyBlock>
+      )}
+      {isDivider && <Spacer />}
+      {isCompletedItems && (
+        <CompletedItemsList items={completedItems} deleteTodo={deleteTodo} />
+      )}
     </div>
   );
 };
@@ -64,7 +83,9 @@ const ActiveItemsList = ({ groupedItems, markAsCompleted }) => {
             <ItemBlock key={i}>
               <LabelBlock>{item.label}</LabelBlock>
               <ButtonBlock>
-                <Button onClick={() => markAsCompleted(item.id)}>✔</Button>
+                <Button type="success" onClick={() => markAsCompleted(item.id)}>
+                  ✔
+                </Button>
               </ButtonBlock>
             </ItemBlock>
           ))}
@@ -81,12 +102,19 @@ const CompletedItemBlock = styled.div`
   text-decoration: line-through;
 `;
 
-const CompletedItemsList = ({ items }) => {
+const CompletedItemsList = ({ items, deleteTodo }) => {
   return (
     <Fragment>
       <ItemTitleBlock>Completed</ItemTitleBlock>
       {items.map((item, i) => (
-        <CompletedItemBlock key={i}>{item.label}</CompletedItemBlock>
+        <ItemBlock key={i}>
+          <CompletedItemBlock>{item.label}</CompletedItemBlock>
+          <ButtonBlock>
+            <Button type="danger" onClick={() => deleteTodo(item.id)}>
+              ✗
+            </Button>
+          </ButtonBlock>
+        </ItemBlock>
       ))}
     </Fragment>
   );
