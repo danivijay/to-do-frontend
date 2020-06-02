@@ -44,6 +44,11 @@ const reducer = (state = initialState, action) => {
           todo.id === action.payload.id ? action.payload : todo
         ),
       };
+    case "DELETE_TODO":
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload.id),
+      };
     default:
       return state;
   }
