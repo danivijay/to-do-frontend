@@ -5,15 +5,17 @@ const TodoItem = require("../models/TodoItem");
 // @access  Private
 exports.getItems = async (req, res, next) => {
   try {
-    const { user_id } = req;
-    const items = await TodoItem.find({ user_id: user_id });
+    // const { user_id } = req;
+    // const items = await TodoItem.find({ user_id: user_id });
+    const items = await TodoItem.find();
+    console.log(items);
     res.status(200).json({
       success: true,
       count: items.length,
-      data: items.map(({ _id: id, label, due_date, status }) => ({
+      data: items.map(({ _id: id, label, dueDate, status }) => ({
         id,
         label,
-        due_date,
+        dueDate,
         status,
       })),
     });
@@ -31,10 +33,10 @@ exports.getItems = async (req, res, next) => {
 // @access  Private
 exports.addTodo = async (req, res, next) => {
   try {
-    const { label, due_date } = req.body;
+    const { label, dueDate } = req.body;
     const item = await TodoItem.create({
       label: label,
-      due_date: due_date,
+      dueDate: dueDate,
       status: "active",
       user_id: req.user_id,
     });
@@ -43,7 +45,7 @@ exports.addTodo = async (req, res, next) => {
       data: {
         id: item.id,
         label: item.label,
-        due_date: item.due_date,
+        dueDate: item.dueDate,
         status: item.status,
         user_id: item.user_id,
       },
@@ -67,7 +69,7 @@ exports.updateTodo = async (req, res, next) => {
       throw new Error("todo is not available to remove");
     }
     todo.label = req.body.label ? req.body.label : todo.label;
-    todo.due_date = req.body.due_date ? req.body.due_date : todo.due_date;
+    todo.dueDate = req.body.dueDate ? req.body.dueDate : todo.dueDate;
     todo.status = req.body.status ? req.body.status : todo.status;
     const item = await todo.save();
     res.status(201).json({
@@ -75,7 +77,7 @@ exports.updateTodo = async (req, res, next) => {
       data: {
         id: item.id,
         label: item.label,
-        due_date: item.due_date,
+        dueDate: item.dueDate,
         status: item.status,
         user_id: item.user_id,
       },

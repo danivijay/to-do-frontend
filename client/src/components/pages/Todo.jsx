@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dayjs from "dayjs";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import List from "../List";
 import Form from "../Form";
 
-import { addTodo, updateTodo } from "actions/todo";
+import { getTodos, addTodo, updateTodo } from "actions/todo";
 
 const Container = styled.div`
   display: flex;
@@ -14,8 +14,12 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Todo = ({ todos, addTodo, updateTodo }) => {
+const Todo = ({ todos, getTodos, addTodo, updateTodo }) => {
   console.log("todos", todos);
+
+  useEffect(() => {
+    getTodos();
+  }, []);
 
   const addTodoItem = (label, dueDate) => {
     const date = dayjs(dueDate);
@@ -23,11 +27,7 @@ const Todo = ({ todos, addTodo, updateTodo }) => {
   };
 
   const markAsCompleted = (id) => {
-    // settodoItems(
-    //   todoItems.map((item) =>
-    //     item.id === id ? { ...item, status: "completed" } : item
-    //   )
-    // );
+    updateTodo(id, { status: "complete" });
   };
   return (
     <Container>
@@ -40,8 +40,9 @@ const Todo = ({ todos, addTodo, updateTodo }) => {
 const mapStateToProps = ({ todos: { todos } }) => ({ todos });
 const mapDispatchToProps = (dispatch) => {
   return {
+    getTodos: (payload) => dispatch(getTodos(payload)),
     addTodo: (payload) => dispatch(addTodo(payload)),
-    updateTodo: (payload) => dispatch(updateTodo(payload)),
+    updateTodo: (id, payload) => dispatch(updateTodo(id, payload)),
   };
 };
 
