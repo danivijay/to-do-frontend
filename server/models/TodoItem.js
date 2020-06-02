@@ -5,7 +5,7 @@ const TodoItemSchema = new mongoose.Schema(
   {
     user_id: { type: Schema.Types.ObjectId, ref: "User" },
     label: { type: String, required: true },
-    due_date: { type: Date, required: true },
+    dueDate: { type: Date, required: true },
     status: { type: String, required: true },
   },
   { timestamps: true }

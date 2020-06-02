@@ -44,16 +44,14 @@ const NavBar = () => {
         <TitleBlock>
           <Title>
             <NavLink
-              to="/todo"
+              to="/"
               style={{ color: "inherit", textDecoration: "none" }}
             >
               TodoMan
             </NavLink>
           </Title>
         </TitleBlock>
-        <Links>
-          <Button fullWidth>Log out</Button>
-        </Links>
+        <Links>{/* <Button fullWidth>Log out</Button> */}</Links>
       </Container>
     </Wrapper>
   );

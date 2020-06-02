@@ -23,10 +23,10 @@ function App() {
         <NavBar />
         <Wrapper>
           <Switch>
-            <Route path="/todo">
+            <Route path="/">
               <Todo />
             </Route>
-            <Route path="/">
+            <Route path="/auth">
               <Home />
             </Route>
           </Switch>
