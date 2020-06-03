@@ -6,7 +6,7 @@ export const ADD_TODO = "ADD_TODO";
 export const UPDATE_TODO = "UPDATE_TODO";
 export const DELETE_TODO = "UPDATE_TODO";
 
-const baseURL = "http://localhost:4000/api/v1";
+const baseURL = "https://to-do-expressjs.herokuapp.com/";
 
 export const getTodos = () => (dispatch) => {
   // console.log(`${baseURL}/todo`);
