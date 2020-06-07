@@ -6,7 +6,7 @@ export const ADD_TODO = "ADD_TODO";
 export const UPDATE_TODO = "UPDATE_TODO";
 export const DELETE_TODO = "UPDATE_TODO";
 
-const baseURL = "https://to-do-expressjs.herokuapp.com/api/v1";
+const baseURL = "http://localhost:4000/api/v1";
 
 export const getTodos = () => (dispatch) => {
   // console.log(`${baseURL}/todo`);
@@ -29,6 +29,9 @@ export const updateTodo = (id, payload) => (dispatch) => {
         type: UPDATE_TODO,
         payload: data?.data?.data,
       });
+      return { success: data?.data?.success };
+    } else {
+      return { success: false };
     }
   });
 };
@@ -40,6 +43,9 @@ export const deleteTodo = (id) => (dispatch) => {
         type: DELETE_TODO,
         payload: { id },
       });
+      return { success: data?.data?.success };
+    } else {
+      return { success: false };
     }
   });
 };
@@ -51,6 +57,9 @@ export const addTodo = (payload) => (dispatch) => {
         type: ADD_TODO,
         payload: data?.data?.data,
       });
+      return { success: data?.data?.success };
+    } else {
+      return { success: false };
     }
   });
 };

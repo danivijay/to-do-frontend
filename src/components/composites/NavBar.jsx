@@ -47,7 +47,7 @@ const NavBar = () => {
               to="/"
               style={{ color: "inherit", textDecoration: "none" }}
             >
-              TodoMan
+              Todo List
             </NavLink>
           </Title>
         </TitleBlock>

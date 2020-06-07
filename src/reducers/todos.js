@@ -7,7 +7,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_TODOS":
-      console.log("in GET_TODOS", action.payload);
       return {
         ...state,
         todos: action.payload,

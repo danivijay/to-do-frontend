@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import dayjs from "dayjs";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import List from "../List";
 import Form from "../Form";
@@ -15,23 +16,55 @@ const Container = styled.div`
 `;
 
 const Todo = ({ todos, getTodos, addTodo, updateTodo, deleteTodo }) => {
-  console.log("todos", todos);
-
   useEffect(() => {
     getTodos();
   }, []);
 
-  const addTodoItem = (label, dueDate) => {
+  const addTodoItem = async (label, dueDate) => {
     const date = dueDate;
-    addTodo({ label, dueDate: date, status: "active" });
+    try {
+      const { success } = await addTodo({
+        label,
+        dueDate: date,
+        status: "active",
+      });
+      if (success) {
+        toast.success("Todo added!");
+      } else {
+        throw new Error("API Failed");
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Unable to add todo!");
+    }
   };
 
-  const markAsCompleted = (id) => {
-    updateTodo(id, { status: "complete" });
+  const markAsCompleted = async (id) => {
+    try {
+      const { success } = await updateTodo(id, { status: "complete" });
+      if (success) {
+        toast("Todo completed!");
+      } else {
+        throw new Error("API Failed");
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Unable to mark todo as done!");
+    }
   };
 
-  const deleteTodoItem = (id) => {
-    deleteTodo(id);
+  const deleteTodoItem = async (id) => {
+    try {
+      const { success } = await deleteTodo(id);
+      if (success) {
+        toast.warn("Completed item removed!");
+      } else {
+        throw new Error("API Failed");
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error("Unable to remove completed item!");
+    }
   };
 
   return (
@@ -42,6 +75,7 @@ const Todo = ({ todos, getTodos, addTodo, updateTodo, deleteTodo }) => {
         markAsCompleted={markAsCompleted}
         deleteTodo={deleteTodoItem}
       />
+      <ToastContainer />
     </Container>
   );
 };

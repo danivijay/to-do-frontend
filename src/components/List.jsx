@@ -7,6 +7,7 @@ import Button from "components/designSystem/Button";
 
 const EmptyBlock = styled.div`
   padding: 50px;
+  color: #9a9a9a;
 `;
 
 const Spacer = styled.hr`
@@ -15,7 +16,6 @@ const Spacer = styled.hr`
 `;
 
 const List = ({ items, markAsCompleted, deleteTodo }) => {
-  console.log(items);
   if (!items || items.length === 0) {
     return <EmptyBlock>Nothing here!!</EmptyBlock>;
   }
@@ -28,7 +28,6 @@ const List = ({ items, markAsCompleted, deleteTodo }) => {
   );
   const isCompletedItems = completedItems && completedItems.length > 0;
   const isDivider = isActiveItems && isCompletedItems;
-  console.log(isActiveItems, isCompletedItems, { isDivider });
   return (
     <div>
       {isActiveItems ? (
@@ -74,7 +73,7 @@ const LabelBlock = styled.div`
 `;
 
 const ActiveItemsList = ({ groupedItems, markAsCompleted }) => {
-  const dates = Object.keys(groupedItems).reverse();
+  const dates = Object.keys(groupedItems).sort();
   return (
     <Fragment>
       {dates.map((date) => (

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import dayjs from "dayjs";
 
 import Label from "components/designSystem/Label";
 import Input from "components/designSystem/Input";
@@ -25,9 +26,11 @@ const DueDateBlock = styled.div`
   flex-direction: column;
   text-align: left;
   flex-basis: 30%;
+  padding-left: 5px;
   @media (max-width: 356px) {
     flex-basis: 100%;
     width: 100%;
+    padding-left: 0;
   }
 `;
 
@@ -46,7 +49,6 @@ const Form = ({ add }) => {
     setlabel("");
     setdueDate("");
   };
-  console.log(label === "" || dueDate == "");
   return (
     <Container>
       <NameBlock>
@@ -65,6 +67,7 @@ const Form = ({ add }) => {
           name="dueDate"
           value={dueDate}
           onChange={(e) => setdueDate(e.target.value)}
+          min={dayjs().format("YYYY-MM-DD")}
         />
       </DueDateBlock>
       <ButtonBlock>
